@@ -2,11 +2,12 @@
 program fpcmidas;
 
 uses
-  midasdos, irqhack;
+  crt, midasdos, irqhack;
 
 var
   m: MIDASmodule;
   p: MIDASModulePlayHandle;
+  ps: MIDASPlayStatus;
 
 begin
   MIDASstartup;
@@ -16,7 +17,13 @@ begin
   writeln('MODULE: $',hexstr(m));
   p:=MIDASPlayModule(m,true);
   writeln('<Press ENTER to quit>');
-  readln;
+
+  repeat
+    MIDASgetPlayStatus(p,@ps);
+    write('Position:',ps.position:3,' - Pattern:',ps.pattern:3,' - Row:',ps.row:3,#13);
+  until keypressed;
+
+  ReadKey;
   MIDASStopModule(p);
   MIDASclose;
 end.

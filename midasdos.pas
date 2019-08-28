@@ -1,3 +1,5 @@
+{$MODE DELPHI}
+{$PACKRECORDS C}
 unit midasdos;
 
 interface
@@ -7,6 +9,15 @@ uses
 
 {$LINKLIB libmidas.a}
 
+{*
+   NOTICE: All structures and function declarations here are copied from
+   midasdll.pas, but might be slightly modified to work with the DOS version,
+   as needed.
+
+   All licensing restrictions which applies with MIDAS/HMQAudio itself
+   applies to these.
+ *}
+
 type
     MIDASmodule = pointer;
     MIDASmodulePlayHandle = DWORD;
@@ -14,6 +25,34 @@ type
     MIDASsamplePlayHandle = DWORD;
     MIDASstreamHandle = pointer;
     MIDASechoHandle = pointer;
+
+type MIDASmoduleInfo =
+    record
+        songName : array[0..31] of char;
+        songLength : integer;
+        numPatterns : integer;
+        numInstruments : integer;
+        numChannels : integer;
+    end;
+    PMIDASmoduleInfo = ^MIDASmoduleInfo;
+
+type MIDASinstrumentInfo =
+    record
+        instName : array[0..31] of char;
+    end;
+    PMIDASinstrumentInfo = ^MIDASinstrumentInfo;
+
+type MIDASplayStatus =
+    record
+        position : dword;
+        pattern : dword;
+        row : dword;
+        syncInfo : integer;
+        songLoopCount : dword
+    end;
+    PMIDASplayStatus = ^MIDASplayStatus;
+
+
 
 function MIDASstartup : boolean; cdecl; external;
 function MIDASconfig : boolean; cdecl; external;
@@ -30,6 +69,19 @@ function MIDASplayModuleSection(module : MIDASmodule; startPos, endPos,
 function MIDASstopModule(playHandle : MIDASmodulePlayHandle) : boolean;
     cdecl; external;
 function MIDASfreeModule(module : MIDASmodule) : boolean; cdecl; external;
+
+function MIDASgetPlayStatus(playHandle : MIDASmodulePlayHandle;
+    status : PMIDASplayStatus) : boolean; cdecl; external;
+function MIDASsetPosition(playHandle : MIDASmodulePlayHandle;
+    newPosition : integer) : boolean; cdecl; external;
+function MIDASsetMusicVolume(playHandle : MIDASmodulePlayHandle;
+    volume : dword) : boolean; cdecl; external;
+function MIDASgetModuleInfo(module : MIDASmodule; info : PMIDASmoduleInfo) :
+    boolean; cdecl; external;
+function MIDASgetInstrumentInfo(module : MIDASmodule; instNum : integer;
+    info : PMIDASinstrumentInfo) : boolean; cdecl; external;
+function MIDASfadeMusicChannel(playHandle : MIDASmodulePlayHandle; channel,
+    fade : dword) : boolean; cdecl; external;
 
 
 implementation
