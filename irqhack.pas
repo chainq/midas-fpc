@@ -41,49 +41,41 @@ var
 {$ASMMODE ATT}
 {$define HANDLER_NUM:=0}
 var _old_vector_0: tseginfo;
-var _stack_0: pointer;
 procedure _irq_wrapper_0;
 {$i irqhack.inc}
 {$undef HANDLER_NUM}
 {$define HANDLER_NUM:=1}
 var _old_vector_1: tseginfo;
-var _stack_1: pointer;
 procedure _irq_wrapper_1;
 {$i irqhack.inc}
 {$undef HANDLER_NUM}
 {$define HANDLER_NUM:=2}
 var _old_vector_2: tseginfo;
-var _stack_2: pointer;
 procedure _irq_wrapper_2;
 {$i irqhack.inc}
 {$undef HANDLER_NUM}
 {$define HANDLER_NUM:=3}
 var _old_vector_3: tseginfo;
-var _stack_3: pointer;
 procedure _irq_wrapper_3;
 {$i irqhack.inc}
 {$undef HANDLER_NUM}
 {$define HANDLER_NUM:=4}
 var _old_vector_4: tseginfo;
-var _stack_4: pointer;
 procedure _irq_wrapper_4;
 {$i irqhack.inc}
 {$undef HANDLER_NUM}
 {$define HANDLER_NUM:=5}
 var _old_vector_5: tseginfo;
-var _stack_5: pointer;
 procedure _irq_wrapper_5;
 {$i irqhack.inc}
 {$undef HANDLER_NUM}
 {$define HANDLER_NUM:=6}
 var _old_vector_6: tseginfo;
-var _stack_6: pointer;
 procedure _irq_wrapper_6;
 {$i irqhack.inc}
 {$undef HANDLER_NUM}
 {$define HANDLER_NUM:=7}
 var _old_vector_7: tseginfo;
-var _stack_7: pointer;
 procedure _irq_wrapper_7;
 {$i irqhack.inc}
 {$undef HANDLER_NUM}
@@ -114,16 +106,6 @@ begin
           lock_data(irq_stack[i],STACK_SIZE);
           inc(irq_stack[i],STACK_SIZE-32);
 //          writeln('stack ',i,' ',hexstr(irq_stack[i]));
-          case i of
-            0: _stack_0:=irq_stack[i];
-            1: _stack_1:=irq_stack[i];
-            2: _stack_2:=irq_stack[i];
-            3: _stack_3:=irq_stack[i];
-            4: _stack_4:=irq_stack[i];
-            5: _stack_5:=irq_stack[i];
-            6: _stack_6:=irq_stack[i];
-            7: _stack_7:=irq_stack[i];
-          end;
         end;
     end;
 end;
