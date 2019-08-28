@@ -15,6 +15,9 @@ should be possible.
 Only tested with recent Free Pascal 3.3.1 trunk version. Needs external
 i386-go32v2-binutils.
 
+Note that using MIDAS/HMQAudio is free, but only for non commercial
+applications. See more details on the HMQAudio homepage.
+
 ## Credits
 
 The IRQ stub code was ripped from Allegro v4 and was heavily modified to
