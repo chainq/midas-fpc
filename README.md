@@ -21,7 +21,7 @@ The IRQ stub code was ripped from Allegro v4 and was heavily modified to
 work with Free Pascal. The IRQ setup/release code was ported from the C
 version in Allegro v4.
 
-### Links and references
+## Links and references
 
 * Housemarque Audio System homepage: http://www.s2.org/hmqaudio/
 * Modern DJGPP crosscompiler (binutils): https://github.com/andrewwutw/build-djgpp
